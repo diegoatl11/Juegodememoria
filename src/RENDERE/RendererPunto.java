@@ -107,7 +107,7 @@ public class RendererPunto implements GLEventListener ,MouseListener, MouseMotio
 
     public void Cubo() {
         gl.glPushMatrix();
-        gl.glColor3d(1, 0, 0);
+        gl.glColor3d(1, 1, 0);
         gl.glTranslatef(0, 0, 0);
         gl.glRotated(theta, 0,1,0);
         glut.glutSolidCube(10);
@@ -162,6 +162,7 @@ public class RendererPunto implements GLEventListener ,MouseListener, MouseMotio
         gl.glColor3d(0, 1, 0);
         gl.glTranslatef(15, -15, 0);
         gl.glRotated(theta, 0,1,0);
+        
         glut.glutSolidCube(10);
         gl.glPopMatrix();
 
@@ -185,8 +186,8 @@ public class RendererPunto implements GLEventListener ,MouseListener, MouseMotio
         
         if((tempX >= 190) && (tempX <= 230)){
             System.out.println("funcion");
-            theta = 60;
-        }else if ((tempX >= 231) && (tempX <= 270)){
+            theta = 80;
+        }else if ((tempX >= 231) && (tempX <= 290)){
             System.err.println("regresa");
             theta=0;
             
