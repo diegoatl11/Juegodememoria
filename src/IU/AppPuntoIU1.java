@@ -7,7 +7,7 @@ package IU;
 
 import MODELO.Punto;
 
-import RENDERE.RendererPunto;
+import RENDERE.RendererPunto2;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
@@ -19,15 +19,15 @@ import com.jogamp.opengl.util.FPSAnimator;
  *
  * @author Docente
  */
-public class AppPuntoIU extends javax.swing.JFrame {
+public class AppPuntoIU1 extends javax.swing.JFrame {
 
     public static GLCanvas glCanvas;
-    private RendererPunto rendererPunto;
+    private RendererPunto2 rendererPunto;
     private Animator animator;
 
-    public AppPuntoIU() {
+    public AppPuntoIU1() {
         initComponents();
-        rendererPunto = new RendererPunto();
+        rendererPunto = new RendererPunto2();
         initCanvas();
         this.setLocationRelativeTo(null);
         animator.start();
@@ -115,20 +115,21 @@ public class AppPuntoIU extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppPuntoIU().setVisible(true);
+                new AppPuntoIU1().setVisible(true);
             }
         });
     }
