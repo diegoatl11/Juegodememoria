@@ -16,20 +16,27 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Random;
 
 public class RendererPunto implements GLEventListener, MouseListener, MouseMotionListener {
 
+    Random random = new Random();
     private Punto punto;
     private GL2 gl;
     private GLU glu;
     private GLUT glut;
-    double rot0, rot1, rot2, rot3,rot4,rot5;
+    double rot0, rot1, rot2, rot3, rot4, rot5;
     double theta;
     double Rotacion;
 
+    double scaX, scaY, scaZ;
     double Sx;
     double Sy;
     double Sz;
+
+    //
+    private int mat[][];
+    public Random aleatorio;
 
     public RendererPunto() {
         punto = new Punto();
@@ -46,6 +53,14 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
         rot3 = 0;
         rot4 = 0;
         rot5 = 0;
+
+        scaX = 1;
+        scaY = 1;
+        scaZ = 1;
+
+        //
+        mat = new int[2][3];
+        aleatorio = new Random();
 
     }
     //nuevo Metodo
@@ -93,83 +108,88 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
 
     public void display(GLAutoDrawable glad) {
         // invocar al encargado de dibujar (canvas)
-        gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+        this.numerosAleatorios();
+        
+        
         gl = glad.getGL().getGL2();
-        //cubo1
-        this.Cubo();
-        //cubo2
-        this.Cubo1();
-        //cubo3
-        this.Cubo2();
-        //cubo4
-        this.Cubo3();
-        //cubo5
-        this.Cubo4();
-        //cubo6
-        this.Cubo5();
-
-    }
-
-    public void Cubo() {
+        
+        
+        //CUBO1-----*
         gl.glPushMatrix();
-        gl.glColor3d(1, 1, 0);
+        gl.glColor3f(mat[0][0], mat[0][0], 1);
         gl.glTranslatef(0, 0, 0);
         gl.glRotated(rot0, 0, 1, 0);
+        gl.glScaled(scaX, scaY, scaZ);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
-    }
-
-    public void Cubo1() {
+        //CUBO2-----*
         gl.glPushMatrix();
-        gl.glColor3d(0, 1, 1);
+        gl.glColor3f(mat[0][1],mat[0][1], 1);
         gl.glTranslatef(-15, 0, 0);
         gl.glRotated(rot1, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
-    }
-
-    public void Cubo2() {
-        //Cubo
+        //CUBO3-----*
         gl.glPushMatrix();
-        gl.glColor3d(0, 1, 0);
+        gl.glColor3d(mat[0][2],0, 1);
         gl.glTranslatef(15, 0, 0);
         gl.glRotated(rot2, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
-
-    }
-
-    public void Cubo3() {
-        //Cubo
+        //CUBO4-----*
         gl.glPushMatrix();
-        gl.glColor3d(1, 0, 0);
+        
+        gl.glColor3f(mat[1][0], 0, 1);
         gl.glTranslatef(-15, -15, 0);
+        gl.glScaled(scaX, scaY, scaZ);
         gl.glRotated(rot3, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
-
-    }
-
-    public void Cubo4() {
-        //Cubo
+        //CUBO5-----*
         gl.glPushMatrix();
-        gl.glColor3d(0, 0, 1);
+        gl.glColor3f(mat[1][1], 0, 1);
         gl.glTranslatef(0, -15, 0);
         gl.glRotated(rot4, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
-
-    }
-
-    public void Cubo5() {
-        //Cubo
+        //CUBO6-----*
         gl.glPushMatrix();
-        gl.glColor3d(1, 1, 1);
+        gl.glColor3f(mat[1][2], 0, 1);
         gl.glTranslatef(15, -15, 0);
         gl.glRotated(rot5, 0, 1, 0);
-
         glut.glutSolidCube(10);
         gl.glPopMatrix();
+    }
+
+    public void numerosAleatorios() {
+
+        int acumulador = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                mat[i][j] = 0;
+
+            }
+        }
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                mat[i][j] = aleatorio.nextInt(3);
+                do {
+                    acumulador = 0;
+                    for (int k = 0; k < 2; k++) {
+                        for (int l = 0; l < 3; l++) {
+                            if (mat[i][j] == mat[k][l]) {
+                                acumulador += 1;
+                            }
+                        }
+                    }
+                    if (acumulador == 3) {
+                        mat[i][j] = aleatorio.nextInt(3);
+                    }
+                } while (acumulador == 3);
+            }
+        }
+
 
     }
 
@@ -189,77 +209,85 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
         Component c = e.getComponent();
         double width = c.getWidth() / 2;
         double height = c.getHeight() / 2;
-        
-        // cubo0
+
+//        // cubo0
+//        if (tempX >= 190 && tempX <= 230) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("funcion");
+//                rot0 = 80;
+//            }
+//        } else if (tempX >= 231 && tempX <= 280) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("regresa");
+//                rot0 = 0;
+//            }
+//        }
+//        //cubo1
+//        if (tempX >= 70 && tempX <= 109) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("funcion");
+//                rot1 = 80;
+//            }
+//        } else if (tempX >= 110 && tempX <= 150) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("regresa");
+//                rot1 = 0;
+//            }
+//        }
+//        //cubo2
+//        if (tempX >= 320 && tempX <= 369) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("funcion");
+//                rot2 = 80;
+//            }
+//        } else if (tempX >= 370 && tempX <= 420) {
+//            if (tempY >= 140 && tempY <= 200) {
+//                System.out.println("regresa");
+//                rot2 = 0;
+//            }
+//        }
+//        //cubo3
+//        if (tempX >= 70 && tempX <= 109) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("funcion");
+//                rot3 = 80;
+//            }
+//        } else if (tempX >= 110 && tempX <= 150) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("regresa");
+//                rot3 = 0;
+//            }
+//        }
+//        //cubo4 
+//        if (tempX >= 190 && tempX <= 229) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("funcion");
+//                rot4 = 80;
+//            }
+//        } else if (tempX >= 230 && tempX <= 280) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("regresa");
+//                rot4 = 0;
+//            }
+//        }
+//        //cubo5
+//        if (tempX >= 320 && tempX <= 369) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("funcion");
+//                rot5 = 80;
+//            }
+//        } else if (tempX >= 370 && tempX <= 420) {
+//            if (tempY >= 230 && tempY <= 300) {
+//                System.out.println("regresa");
+//                rot5 = 0;
+//            }
+//        }
         if (tempX >= 190 && tempX <= 230) {
             if (tempY >= 140 && tempY <= 200) {
                 System.out.println("funcion");
-                rot0 = 80;
-            }
-        } else if (tempX >= 231 && tempX <= 280) {
-            if(tempY >= 140 && tempY <= 200){
-                System.out.println("regresa");
-            rot0 = 0;
-            }
-        }
-        //cubo1
-        if (tempX >= 70 && tempX <= 109) {
-            if (tempY >= 140 && tempY <= 200) {
-                System.out.println("funcion");
-                rot1 = 80;
-            }
-        } else if (tempX >= 110 && tempX <= 150) {
-            if(tempY >= 140 && tempY <= 200){
-                System.out.println("regresa");
-            rot1 = 0;
-            }
-        }
-        //cubo2
-        if (tempX >= 320 && tempX <= 369) {
-            if (tempY >= 140 && tempY <= 200) {
-                System.out.println("funcion");
-                rot2 = 80;
-            }
-        } else if (tempX >= 370 && tempX <= 420) {
-            if(tempY >= 140 && tempY <= 200){
-                System.out.println("regresa");
-            rot2 = 0;
-            }
-        }
-        //cubo3
-        if (tempX >= 70 && tempX <= 109) {
-            if (tempY >= 230 && tempY <= 300) {
-                System.out.println("funcion");
-                rot3 = 80;
-            }
-        } else if (tempX >= 110 && tempX <= 150) {
-            if(tempY >= 230 && tempY <= 300){
-                System.out.println("regresa");
-            rot3 = 0;
-            }
-        }
-        //cubo4 
-        if (tempX >= 190 && tempX <= 229) {
-            if (tempY >= 230 && tempY <= 300) {
-                System.out.println("funcion");
-                rot4 = 80;
-            }
-        } else if (tempX >= 230 && tempX <= 280) {
-            if(tempY >= 230 && tempY <= 300){
-                System.out.println("regresa");
-            rot4 = 0;
-            }
-        }
-        //cubo5
-        if (tempX >= 320 && tempX <= 369) {
-            if (tempY >= 230 && tempY <= 300) {
-                System.out.println("funcion");
-                rot5 = 80;
-            }
-        } else if (tempX >= 370 && tempX <= 420) {
-            if(tempY >= 230 && tempY <= 300){
-                System.out.println("regresa");
-            rot5 = 0;
+                scaX = 0;
+                scaY = 0;
+                scaZ = 0;
             }
         }
 
