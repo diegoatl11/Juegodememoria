@@ -53,6 +53,11 @@ public class AppPuntoIU extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Se acabo tu tiempo vuelve a intentarlo ");
                     dispose();
                     cronometro.stop();
+//                        App_Juego vista = new App_Juego();
+//                        
+
+//                         vista.setVisible(true);
+//                         dispose();
                 }
                 tiempo.setText(hor + ":" + min + ":" + seg);
                 Thread.sleep(999);

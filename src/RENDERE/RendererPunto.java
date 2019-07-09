@@ -96,6 +96,18 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
                 0, 1, 0);
 
         gl.glDrawBuffer(GL2.GL_FRONT_AND_BACK);
+        //
+        float position[] = {0f, 10f, 0f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, position, 0);
+        float diffuse[] = {.7f, .7f, 0.7f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, diffuse, 0);
+        float ambient[] = {.2f, .2f, .2f, 0f};
+        gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_AMBIENT, ambient, 0);
+        //
+        //
+        gl.glEnable(GL2.GL_LIGHTING);
+        gl.glEnable(GL2.GL_LIGHT0);
+        gl.glEnable(GL2.GL_DEPTH_TEST);
 
     }
 
@@ -109,14 +121,18 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
     public void display(GLAutoDrawable glad) {
         // invocar al encargado de dibujar (canvas)
         this.numerosAleatorios();
-        
-        
+
         gl = glad.getGL().getGL2();
-        
-        
+
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        gl.glClearColor(0, 0, 0, 1);
+
         //CUBO1-----*
         gl.glPushMatrix();
-        gl.glColor3f(mat[0][0], mat[0][0], 1);
+
+        float material1[] = {mat[0][0], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material1, 0);
+
         gl.glTranslatef(0, 0, 0);
         gl.glRotated(rot0, 0, 1, 0);
         gl.glScaled(scaX, scaY, scaZ);
@@ -124,21 +140,27 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
         gl.glPopMatrix();
         //CUBO2-----*
         gl.glPushMatrix();
-        gl.glColor3f(mat[0][1],mat[0][1], 1);
+        float material2[] = {mat[0][1], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material2, 0);
+        gl.glColor3f(mat[0][1], 0, 1);
         gl.glTranslatef(-15, 0, 0);
         gl.glRotated(rot1, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
         //CUBO3-----*
+
         gl.glPushMatrix();
-        gl.glColor3d(mat[0][2],0, 1);
+        float material3[] = {mat[0][2], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material3, 0);
+        gl.glColor3d(mat[0][2], 0, 1);
         gl.glTranslatef(15, 0, 0);
         gl.glRotated(rot2, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
         //CUBO4-----*
         gl.glPushMatrix();
-        
+        float material4[] = {mat[1][0], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material4, 0);
         gl.glColor3f(mat[1][0], 0, 1);
         gl.glTranslatef(-15, -15, 0);
         gl.glScaled(scaX, scaY, scaZ);
@@ -147,6 +169,8 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
         gl.glPopMatrix();
         //CUBO5-----*
         gl.glPushMatrix();
+        float material5[] = {mat[1][1], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material5, 0);
         gl.glColor3f(mat[1][1], 0, 1);
         gl.glTranslatef(0, -15, 0);
         gl.glRotated(rot4, 0, 1, 0);
@@ -154,11 +178,21 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
         gl.glPopMatrix();
         //CUBO6-----*
         gl.glPushMatrix();
+        float material6[] = {mat[1][2], 0.4f, 0.5f, 0.5f};
+        gl.glMaterialfv(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, material6, 0);
         gl.glColor3f(mat[1][2], 0, 1);
         gl.glTranslatef(15, -15, 0);
         gl.glRotated(rot5, 0, 1, 0);
         glut.glutSolidCube(10);
         gl.glPopMatrix();
+        
+        //valores de matriz
+        System.out.println("numero  = "+ mat[0][0] );
+        System.out.println("numero  = "+ mat[0][1] );
+        System.out.println("numero  = "+ mat[0][2] );
+        System.out.println("numero  = "+ mat[1][0] );
+        System.out.println("numero  = "+ mat[1][1] );
+        System.out.println("numero  = "+ mat[1][2] );
     }
 
     public void numerosAleatorios() {
@@ -189,7 +223,13 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
                 } while (acumulador == 3);
             }
         }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(mat[i][j] + "   ");
 
+            }
+            System.out.println("");
+        }
 
     }
 
@@ -282,14 +322,7 @@ public class RendererPunto implements GLEventListener, MouseListener, MouseMotio
 //                rot5 = 0;
 //            }
 //        }
-        if (tempX >= 190 && tempX <= 230) {
-            if (tempY >= 140 && tempY <= 200) {
-                System.out.println("funcion");
-                scaX = 0;
-                scaY = 0;
-                scaZ = 0;
-            }
-        }
+       
 
     }
 
