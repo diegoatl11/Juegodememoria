@@ -19,7 +19,6 @@ public class App_Juego extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -107,16 +106,19 @@ public class App_Juego extends javax.swing.JFrame {
 
     private void botonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInicioActionPerformed
         // TODO add your handling code here:
-        AppPuntoIU  vista = new AppPuntoIU();
+
+        AppPuntoIU vista1 = new AppPuntoIU();
         //ver el nivel 1
-        vista.setVisible(true);
+        vista1.setVisible(true);
         //ver el nivel 2
         this.setVisible(false);
+
+
     }//GEN-LAST:event_botonInicioActionPerformed
 
     private void botonivel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonivel1ActionPerformed
         // TODO add your handling code here:
-         AppPuntoIU  vista1 = new AppPuntoIU();
+        AppPuntoIU vista1 = new AppPuntoIU();
         //ver el nivel 1
         vista1.setVisible(true);
         //ver el nivel 2

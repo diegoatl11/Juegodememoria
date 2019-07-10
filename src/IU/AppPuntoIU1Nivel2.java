@@ -5,10 +5,9 @@
  */
 package IU;
 
-
 import MODELO.Punto;
 
-import RENDERE.RendererPunto;
+import RENDERE.RendererPuntoNivel2;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
@@ -22,26 +21,25 @@ import javax.swing.JOptionPane;
  *
  * @author Docente
  */
-public class AppPuntoIU extends javax.swing.JFrame {
+public class AppPuntoIU1Nivel2 extends javax.swing.JFrame {
 
     int status = 1;
     public static GLCanvas glCanvas;
-    private RendererPunto rendererPunto;
+    private RendererPuntoNivel2 rendererPunto;
     String jugador;
     JFrame ventana;
-    
-    public AppPuntoIU() {
+
+    public AppPuntoIU1Nivel2() {
         initComponents();
         cronometro.start();
-        rendererPunto = new RendererPunto();
-        
+        rendererPunto = new RendererPuntoNivel2();
+
         initCanvas();
         this.setLocationRelativeTo(null);
         this.Mostrar();
 
     }
-   
- 
+
     public void initCanvas() {
 
         GLProfile profile = GLProfile.getDefault();
@@ -56,25 +54,21 @@ public class AppPuntoIU extends javax.swing.JFrame {
         int w = this.PanelJOGL.getWidth();
         int h = this.PanelJOGL.getHeight();
         glCanvas.setSize(w, h);
-        
-//        final FPSAnimator animator = new FPSAnimator(glCanvas, 100, true);
-//        animator.start();
-        
 
     }
     //METODO RECUPERADO DE : Juego Memoria parte 3 netbeans java grafico
     //Link: https://www.youtube.com/watch?v=bxTRrzZuiqs
-    public void Mostrar(){
-          jugador = JOptionPane.showInputDialog(ventana, "Nombre del jugador", "Escribe aqui" );     
-                while(jugador == null || jugador.compareTo("Escribe aqui")==0 || jugador.compareTo("")==0){
-                    jugador = JOptionPane.showInputDialog(ventana, "Debes ingresar usuario","Escribe aqui");
-                }
-                this.HOLAAA.setText("Jugador: "+jugador );
-                
+    public void Mostrar() {
+        jugador = JOptionPane.showInputDialog(ventana, "Nombre del jugador", "Escribe aqui");
+        while (jugador == null || jugador.compareTo("Escribe aqui") == 0 || jugador.compareTo("") == 0) {
+            jugador = JOptionPane.showInputDialog(ventana, "Debes ingresar usuario", "Escribe aqui");
+        }
+        this.HOLAAA.setText("Jugador: " + jugador);
+
     }
     //METODO RECUPERADO DE : Agregar contador de tiempo a un frame en netbeans
     //Link: https://www.youtube.com/watch?v=jfpha2yzPLk&feature=youtu.be
-     Thread cronometro = new Thread() {
+    Thread cronometro = new Thread() {
         public void run() {
             int hor = 00, min = 00, seg = 00;
             for (;;) {
@@ -109,8 +103,6 @@ public class AppPuntoIU extends javax.swing.JFrame {
         }
 
     };
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -184,9 +176,10 @@ public class AppPuntoIU extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(HOLAAA)
-                    .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelJOGL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,7 +192,7 @@ public class AppPuntoIU extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    //CAMBIANDO EL NOMBRE DE BOTON
+
     private void SecuenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecuenciaActionPerformed
         if (status == 1) {
             cronometro.suspend();
@@ -234,20 +227,21 @@ public class AppPuntoIU extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1Nivel2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1Nivel2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1Nivel2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppPuntoIU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AppPuntoIU1Nivel2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppPuntoIU().setVisible(true);
+                new AppPuntoIU1Nivel2().setVisible(true);
             }
         });
     }
